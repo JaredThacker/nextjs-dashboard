@@ -1,6 +1,7 @@
 "use server";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -28,4 +29,5 @@ export async function createInvoice(formData: FormData) {
   `;
 
   revalidatePath("/dashboard/invoices");
+  redirect("/dashboard/invoices");
 }
